@@ -96,9 +96,9 @@ export default function Home() {
   return (
     <div className="space-y-24">
       <section className="rs-hero-pattern">
-        <div className="rs-container py-16 md:py-20">
+        <div className="rs-container py-8 md:py-12">
           <div className="flex flex-col lg:flex-row items-start lg:items-center gap-12">
-            <div className="flex-1 space-y-6 text-white">
+            <div className="flex-1 space-y-4 text-white">
               <span className="rs-chip" style={{ background: "rgba(255,255,255,0.2)", color: "#ffffff" }}>
                 Government of Telangana • Road Safety Month
               </span>
