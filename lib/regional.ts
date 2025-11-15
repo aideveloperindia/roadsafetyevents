@@ -8,11 +8,11 @@ export interface RegionalAuthority {
 }
 
 export const REGIONAL_AUTHORITIES: Record<string, RegionalAuthority> = {
-  rajannasircilla: {
-    code: "rajannasircilla",
-    district: "Rajanna Sircilla",
+  karimnagar: {
+    code: "karimnagar",
+    district: "Karimnagar",
     officerName: "Sri Padala Rahul Garu",
-    officerTitle: "Regional Transport Authority Member, Rajanna Sircilla",
+    officerTitle: "Regional Transport Authority Member, Karimnagar",
     photo: "/assets/leadership/Karimnagarrtamemberpadalarahul.webp",
     description:
       "Leads district-wide enforcement and awareness drives focusing on student community road safety pledges and compliance.",

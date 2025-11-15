@@ -9,7 +9,7 @@ import { REGIONAL_AUTHORITIES } from "@/lib/regional";
 export default function RegionalCertificatesPage() {
   const today = useMemo(() => new Date().toISOString().slice(0, 10), []);
   
-  // Only Sircilla with Padala Rahul RTA
+  // Only Karimnagar with Padala Rahul RTA
   const REGIONAL_SECTIONS = useMemo(() => {
     return Object.values(REGIONAL_AUTHORITIES);
   }, []);
