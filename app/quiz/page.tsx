@@ -243,8 +243,8 @@ export default function QuizPage() {
           return;
         }
         
-        // Handle language-not-supported error
-        if (event.error === "language-not-supported" && lang === "te") {
+        // Handle language-unavailable error (Telugu TTS may not be supported)
+        if ((event.error === "language-unavailable" || event.error === "voice-unavailable") && lang === "te") {
           console.warn("⚠️ Telugu TTS not supported in this browser.");
           console.warn("💡 English TTS works without setup. Telugu may require OS language pack.");
           // Try falling back to English if Telugu fails
@@ -805,7 +805,7 @@ export default function QuizPage() {
                   testUtterance.onstart = () => console.log("✅ Test speech started");
                   testUtterance.onerror = (e) => {
                     console.error("❌ Test speech error:", e);
-                    if (lang === "te" && (e.error === "language-not-supported" || e.error === "synthesis-failed")) {
+                    if (lang === "te" && (e.error === "language-unavailable" || e.error === "voice-unavailable" || e.error === "synthesis-failed")) {
                       alert("Telugu TTS not available in this browser. Please:\n1. Install Telugu language pack in Windows Settings\n2. Or use English language for Quiz Master");
                     }
                   };
@@ -851,7 +851,7 @@ export default function QuizPage() {
       </div>
 
       {/* Celebration Animation */}
-      {showCelebration && (
+      {showCelebration && result && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm animate-fade-in">
           <div className="relative bg-white rounded-3xl p-8 md:p-12 max-w-md mx-4 text-center shadow-2xl animate-slide-up overflow-hidden">
             {/* Confetti effect */}
@@ -881,10 +881,10 @@ export default function QuizPage() {
                   ? "మీరు క్విజ్ పూర్తి చేశారు!" 
                   : "You have completed the quiz!"}
               </p>
-              {result?.referenceId && (
+              {(result as { referenceId?: string | null }).referenceId && (
                 <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-3 mb-4">
                   <p className="text-xs text-emerald-600 mb-1">{tc("referenceId")}</p>
-                  <p className="font-mono font-semibold text-emerald-900">{result.referenceId}</p>
+                  <p className="font-mono font-semibold text-emerald-900">{(result as { referenceId?: string | null }).referenceId}</p>
                 </div>
               )}
               <Button
