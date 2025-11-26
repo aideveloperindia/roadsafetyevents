@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Link from "next/link";
 import Image from "next/image";
@@ -16,11 +17,48 @@ import {
   TrafficCone,
   AlertTriangle,
   Footprints,
+  Music,
 } from "lucide-react";
 
 export default function Home() {
   const { t } = useTranslation("common");
   const { t: tc } = useTranslation("content");
+  const anthemAudioRef = useRef<HTMLAudioElement | null>(null);
+  const [isPlayingAnthem, setIsPlayingAnthem] = useState(false);
+
+  useEffect(() => {
+    const audio = new Audio("/assets/ROADSAFETY3.wav");
+    audio.preload = "auto";
+    const handleEnded = () => {
+      setIsPlayingAnthem(false);
+    };
+    audio.addEventListener("ended", handleEnded);
+    anthemAudioRef.current = audio;
+
+    return () => {
+      audio.pause();
+      audio.removeEventListener("ended", handleEnded);
+      anthemAudioRef.current = null;
+    };
+  }, []);
+
+  const handleToggleAnthem = async () => {
+    const audio = anthemAudioRef.current;
+    if (!audio) return;
+
+    if (!isPlayingAnthem) {
+      try {
+        await audio.play();
+        setIsPlayingAnthem(true);
+      } catch {
+        // Ignore autoplay block errors; user can try again
+      }
+    } else {
+      audio.pause();
+      audio.currentTime = 0;
+      setIsPlayingAnthem(false);
+    }
+  };
   const leadershipProfiles = [
     {
       title: tc("honChiefMinister"),
@@ -114,6 +152,14 @@ export default function Home() {
                   <BrainCircuit className="h-5 w-5" />
                   {tc("launchSimulationLab")}
                 </Link>
+                <button
+                  type="button"
+                  onClick={handleToggleAnthem}
+                  className="inline-flex items-center gap-2 rounded-full border border-white/60 bg-white/10 px-4 py-2 text-sm font-semibold text-white backdrop-blur hover:bg-white/20"
+                >
+                  <Music className="h-5 w-5" />
+                  {isPlayingAnthem ? "Stop Anthem" : "Anthem"}
+                </button>
               </div>
             </div>
             <div className="relative flex-1 min-w-[280px]">

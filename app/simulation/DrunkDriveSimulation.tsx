@@ -141,27 +141,33 @@ export default function DrunkDriveSimulation() {
         <div className="flex-1 order-1 lg:order-none w-full">
           <div
             ref={canvasRef}
-            className="relative border-2 border-gray-300 rounded-lg bg-white overflow-hidden h-[360px] sm:h-[420px] lg:h-[500px]"
-            style={{ backgroundColor: "#ffffff" }}
+            className="relative border-2 border-gray-300 rounded-lg overflow-hidden h-[360px] sm:h-[420px] lg:h-[500px]"
+            style={{ backgroundColor: isCompleted ? "#16a34a" : "#b91c1c" }}
             onPointerMove={handleDrag}
             onPointerUp={handleDragEnd}
             onPointerLeave={handleDragEnd}
           >
-            <div className="absolute inset-0 bg-white" style={{ zIndex: 0 }} />
+            <div 
+              className="absolute inset-0" 
+              style={{ 
+                zIndex: 0,
+                backgroundColor: isCompleted ? "#16a34a" : "#b91c1c"
+              }} 
+            />
 
             {!showSoberVideo ? (
               <img
                 src="/media/simulation%20media/drunkndrive/drunkanddrive.png"
                 alt="Drunk driving scene"
                 className="absolute inset-0 w-full h-full object-contain"
-                style={{ zIndex: 1, backgroundColor: "#ffffff" }}
+                style={{ zIndex: 1, backgroundColor: "#b91c1c" }}
                 draggable={false}
               />
             ) : (
               <video
                 ref={videoRef}
                 className="absolute inset-0 w-full h-full object-contain"
-                style={{ zIndex: 1, backgroundColor: "#ffffff" }}
+                style={{ zIndex: 1, backgroundColor: "#16a34a" }}
                 autoPlay
                 loop
                 muted

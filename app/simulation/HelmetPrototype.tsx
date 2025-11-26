@@ -158,19 +158,20 @@ export default function HelmetPrototype() {
         <div className="flex-1 order-1 lg:order-none w-full">
           <div
             ref={canvasRef}
-            className="relative border-2 border-gray-300 rounded-lg bg-white overflow-hidden h-[360px] sm:h-[420px] lg:h-[500px]"
+            className="relative border-2 border-gray-300 rounded-lg overflow-hidden h-[360px] sm:h-[420px] lg:h-[500px]"
             style={{
-              backgroundColor: "#ffffff",
+              backgroundColor: isCompleted ? "#16a34a" : "#b91c1c",
             }}
             onPointerMove={handleDrag}
             onPointerUp={handleDragEnd}
             onPointerLeave={handleDragEnd}
           >
-            {/* White background layer - ensures no transparency shows */}
+            {/* Background layer - red for violation, green for corrected */}
             <div
-              className="absolute inset-0 bg-white"
+              className="absolute inset-0"
               style={{
                 zIndex: 0,
+                backgroundColor: isCompleted ? "#16a34a" : "#b91c1c",
               }}
             />
 
@@ -182,7 +183,7 @@ export default function HelmetPrototype() {
               style={{
                 opacity: 1,
                 zIndex: 1,
-                backgroundColor: "#ffffff",
+                backgroundColor: isCompleted ? "#16a34a" : "#b91c1c",
               }}
               draggable={false}
             />

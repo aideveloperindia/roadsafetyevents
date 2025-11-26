@@ -131,28 +131,34 @@ export default function OverspeedSimulation() {
         <div className="flex-1 order-1 lg:order-none w-full">
           <div
             ref={canvasRef}
-            className="relative border-2 border-gray-300 rounded-lg bg-white overflow-hidden h-[360px] sm:h-[420px] lg:h-[500px]"
-            style={{ backgroundColor: "#ffffff" }}
+            className="relative border-2 border-gray-300 rounded-lg overflow-hidden h-[360px] sm:h-[420px] lg:h-[500px]"
+            style={{ backgroundColor: isCompleted ? "#16a34a" : "#b91c1c" }}
             onPointerMove={handleDrag}
             onPointerUp={handleDragEnd}
             onPointerLeave={handleDragEnd}
           >
-            <div className="absolute inset-0 bg-white" style={{ zIndex: 0 }} />
+            <div
+              className="absolute inset-0"
+              style={{
+                zIndex: 0,
+                backgroundColor: isCompleted ? "#16a34a" : "#b91c1c",
+              }}
+            />
 
             {!showCorrectedSpeed ? (
               <img
-                src="/media/simulation%20media/overspeed/overspeed.png"
+                src="/media/simulation%20media/overspeed/overspeed.png?v=2"
                 alt="Overspeed violation"
                 className="absolute inset-0 w-full h-full object-contain"
-                style={{ zIndex: 1, backgroundColor: "#ffffff" }}
+                style={{ zIndex: 1, backgroundColor: "#b91c1c" }}
                 draggable={false}
               />
             ) : (
               <img
-                src="/media/simulation%20media/overspeed/corrected%20speed.png"
+                src="/media/simulation%20media/overspeed/corrected%20speed.png?v=2"
                 alt="Corrected speed"
                 className="absolute inset-0 w-full h-full object-contain"
-                style={{ zIndex: 1, backgroundColor: "#ffffff" }}
+                style={{ zIndex: 1, backgroundColor: "#16a34a" }}
                 draggable={false}
               />
             )}
@@ -176,7 +182,7 @@ export default function OverspeedSimulation() {
                 <img
                   src={
                     draggedItem === "speedometer"
-                      ? "/media/simulation%20media/overspeed/drag%20speedometer.png"
+                      ? "/media/simulation%20media/overspeed/drag%20speedometer.png?v=2"
                       : draggedItem === "helmet"
                       ? "/media/simulation%20media/helmet%20wearing/helmet.png"
                       : draggedItem === "discipline"
